@@ -1,8 +1,4 @@
-class TransactionCreateRequest
-  include ActiveModel::Model
-  include ActiveModel::Attributes
-  include MoneyRails::ActiveRecord::Monetizable
-
+class TransactionCreateRequest < BaseRequest
   attribute :base_amount, :integer
   attribute :decimal_amount, :integer
   attribute :currency, :string
