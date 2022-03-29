@@ -38,6 +38,22 @@ Run the webserver at http://localhost:3000
 bundle exec rails s
 ```
 
+## Test data
+
+The seed command adds a credit to a customer, and a transaction between two customers.
+
+To add more transaction data, you can use FactoryBot definitions in the rails console:
+
+```rb
+# Loading development environment (Rails 7.0.2.3)
+# irb(main):001:0>
+include FactoryBot::Syntax::Methods
+
+customer = Customer.find_by(email: "test+1@digidentity.com")
+# Give 100 euro credit to customer:
+create(:transaction, :credit, :recalculate_balance, amount_cents: 100_00, receiver: customer)
+```
+
 ## Expectations
 
 - Transactions have a `currency` attached to them. Right now they always default to `EUR`, but could be extended

@@ -33,3 +33,8 @@ create(
   :transaction, :transfer, :recalculate_balance,
   amount_cents: 20_00, sender:, receiver:
 )
+
+puts
+puts "Login using"
+puts "email: test+1@digidentity.com"
+puts "password: Welkom123!"
