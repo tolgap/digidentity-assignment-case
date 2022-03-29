@@ -26,6 +26,12 @@ And install all dependencies:
 bundle install
 ```
 
+Prepare the database with test data (using seeds)
+
+```
+bundle exec rails db:reset
+```
+
 Run the webserver at http://localhost:3000
 
 ```
