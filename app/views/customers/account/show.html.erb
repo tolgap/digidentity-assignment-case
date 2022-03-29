@@ -1,0 +1,49 @@
+<div class="row">
+    <%= link_to "Send new transfer", [:new, :transaction], class: "button is-primary" %>
+</div>
+
+<div class="row">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Receiver</th>
+        <th>Amount</th>
+        <th>Sent on</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @transactions.each do |transaction| %>
+        <tr>
+          <td>
+            <span><%= transaction.transaction_type %>:</span>
+            <%= transaction.receiver.account_number %>
+          </td>
+
+          <td>
+            <% if transaction.sender == current_customer %>
+              <%= (-1 * transaction.amount).format %>
+            <% else %>
+              <%= transaction.amount.format %>
+            <% end %>
+          </td>
+
+          <td>
+            <%= l(transaction.created_at, format: :long) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+
+    <tfoot>
+      <tr>
+        <td>
+          <strong>Total: </strong>
+        </td>
+        <td>
+          <strong><%= current_customer.balance.format %></strong>
+        </td>
+      <tr>
+    </tfoot>
+  </table>
+</div>

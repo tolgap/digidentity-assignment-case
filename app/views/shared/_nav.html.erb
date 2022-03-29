@@ -1,0 +1,19 @@
+<nav class="navbar" role="navigation">
+  <div class="navbar-menu">
+    <div class="navbar-start">
+      <%= link_to "Home", [:root], class: "navbar-item" %>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <% if customer_signed_in? %>
+            <%= button_to "Sign out", destroy_customer_session_path,
+                          class: "button is-light",
+                          method: :delete %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

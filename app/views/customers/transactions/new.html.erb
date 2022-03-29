@@ -1,0 +1,43 @@
+<% if @transaction_create_request.errors.any? %>
+  <div id="error_explanation">
+    <ul>
+      <% @transaction_create_request.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<% if @transaction&.errors&.any? %>
+  <div id="error_explanation">
+    <ul>
+      <% @transaction.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_for(@transaction_create_request, as: :transaction, url: [:transactions]) do |f| %>
+  <div class="field field-group">
+    <%= f.label :amount %><br />
+    &euro;
+    <%= f.number_field :base_amount, autofocus: true %>
+    ,
+    <%= f.number_field :decimal_amount %>
+  </div>
+
+  <div class="field">
+    <%= f.label :account_number %>
+    <%= f.text_field :account_number %>
+  </div>
+
+  <div class="field">
+    <%= f.label :account_holder %><br />
+    <%= f.text_field :account_holder %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Send!" %>
+  </div>
+<% end %>

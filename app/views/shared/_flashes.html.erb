@@ -1,0 +1,6 @@
+<% flash.each do |type, msg| %>
+  <div class="notification is-<%= type.to_s == "notice" ? "success" : "warning" %>">
+    <button class="delete"></button>
+    <%= msg %>
+  </div>
+<% end %>
