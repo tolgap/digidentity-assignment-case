@@ -71,5 +71,5 @@ To showcase skill in testing frameworks, RSpec unit and integration tests have b
 bundle exec rspec
 ```
 
-- `rspec/request_models`: examples of unit tests
+- `rspec/(models|request_models)`: examples of unit tests
 - `rspec/system`: examples of integration tests. Uses `rack_test` driver
