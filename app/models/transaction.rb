@@ -19,6 +19,17 @@ class Transaction < ApplicationRecord
 
   monetize :amount_cents, with_model_currency: :currency
 
+  after_save :after_save_recalculate_sender_receiver_balances
+
+  private
+
+  def after_save_recalculate_sender_receiver_balances
+    ActiveRecord::Base.transaction do
+      sender&.update_balance_atomic!(amount_cents: -amount_cents)
+      receiver.update_balance_atomic!(amount_cents: amount_cents)
+    end
+  end
+
   def validate_sender_balance
     return unless sender
 

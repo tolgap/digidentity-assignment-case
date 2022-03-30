@@ -19,10 +19,9 @@ class Customer < ApplicationRecord
 
   monetize :balance_cents
 
-  def recalculate_balance!
+  def update_balance_atomic!(amount_cents:)
     lock!
-    self.balance_cents = received_transactions.sum(:amount_cents) -
-                         sent_transactions.sum(:amount_cents)
+    self.balance_cents += amount_cents
     save!
   end
 end
