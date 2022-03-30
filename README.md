@@ -51,7 +51,7 @@ include FactoryBot::Syntax::Methods
 
 customer = Customer.find_by(email: "test+1@digidentity.com")
 # Give 100 euro credit to customer:
-create(:transaction, :credit, :recalculate_balance, amount_cents: 100_00, receiver: customer)
+create(:transaction, :credit, amount_cents: 100_00, receiver: customer)
 ```
 
 ## Expectations
@@ -59,7 +59,7 @@ create(:transaction, :credit, :recalculate_balance, amount_cents: 100_00, receiv
 - Transactions have a `currency` attached to them. Right now they always default to `EUR`, but could be extended
 - Models use `money-rails` under the hood. Calculations of balance and transactions happen using this gem
 - To minimize complex logic in controllers, "request parameter models" are used. Request parameter models have the same idea as Laravel Request validations. To validate your request params separate from database model params.
-- In order to avoid heavy database queries to calculate balance, the balance has been denormalized as a field in `Customer#balance_cents`. In order to avoid race conditions with keeping this `balance_cents` field, the way to update this is by using `Customer#recalculate_balance!`. This locks the customer row in the database, and ensures it gets updated atomically.
+- In order to avoid heavy database queries to calculate balance, the balance has been denormalized as a field in `Customer#balance_cents`. In order to avoid race conditions with keeping this `balance_cents` field, the way to update this is by using `Customer#update_balance_atomic!`. This locks the customer row in the database, and ensures it gets updated atomically.
 
 ## Tests
 
