@@ -38,6 +38,8 @@ Run the webserver at http://localhost:3000
 bundle exec rails s
 ```
 
+You can login using `test+1@digidentity.com` and password `Welkom123!`.
+
 ## Test data
 
 The seed command adds a credit to a customer, and a transaction between two customers.
