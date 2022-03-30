@@ -6,9 +6,9 @@ module Customers
 
     def create
       if transaction_create_request.valid?
-        @transaction = transfer_transaction!
+        @transaction = build_transfer_transaction!
 
-        if @transaction.valid?
+        if @transaction.save
           flash[:notice] = "Transaction sent"
           return redirect_to root_path
         end
@@ -20,15 +20,12 @@ module Customers
 
     private
 
-    def transfer_transaction!
-      service = TransferService.new(
+    def build_transfer_transaction!
+      Transaction.new(
         sender: current_customer,
-        receiver: transaction_create_request.receiver
-      )
-
-      service.transfer_amount!(
+        receiver: transaction_create_request.receiver,
         amount_cents: transaction_create_request.amount_cents,
-        currency: transaction_create_request.currency
+        transaction_type: "transfer"
       )
     end
 
