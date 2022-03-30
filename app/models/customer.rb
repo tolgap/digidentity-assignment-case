@@ -19,6 +19,10 @@ class Customer < ApplicationRecord
 
   monetize :balance_cents
 
+  def transactions
+    sent_transactions.or(received_transactions).order(created_at: :desc)
+  end
+
   def update_balance_atomic!(amount_cents:)
     lock!
     self.balance_cents += amount_cents
