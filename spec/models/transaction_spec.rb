@@ -15,7 +15,7 @@ RSpec.describe Transaction do
       transaction.save
     end
 
-    it "should not update customer balance if after_save fails" do
+    it "should not update customer balance if after_create fails" do
       expect(receiver).to receive(:save!).and_raise(ActiveRecord::RecordInvalid)
 
       transaction.save
@@ -41,7 +41,7 @@ RSpec.describe Transaction do
       expect(transaction.save).to be(true)
     end
 
-    it "should not update customer balance if after_save fails" do
+    it "should not update customer balance if after_create fails" do
       expect(receiver).to receive(:save!).and_raise(ActiveRecord::RecordInvalid)
 
       transaction.save
