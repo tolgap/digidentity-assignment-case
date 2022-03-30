@@ -6,7 +6,7 @@ RSpec.describe "transactions" do
   end
 
   before do
-    create(:transaction, :credit, :recalculate_balance,
+    create(:transaction, :credit,
            amount_cents: 100_00, receiver: customer)
     create(:customer, email: "test2@tester.com", account_number: "ABNA0444")
 

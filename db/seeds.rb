@@ -22,15 +22,15 @@ receiver = create(
   account_number: "NL25ABNA012345678"
 )
 
-# Give credit for customer to use
+# Give credit to the sender to use
 create(
-  :transaction, :credit, :recalculate_balance,
+  :transaction, :credit,
   amount_cents: 100_00, receiver: sender
 )
 
-# Create a transaction to another customer
+# Create a transaction to another customer from sender to receiver
 create(
-  :transaction, :transfer, :recalculate_balance,
+  :transaction, :transfer,
   amount_cents: 20_00, sender:, receiver:
 )
 

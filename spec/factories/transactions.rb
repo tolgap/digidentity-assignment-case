@@ -13,12 +13,5 @@ FactoryBot.define do
     trait :credit do
       transaction_type { "credit" }
     end
-
-    trait :recalculate_balance do
-      after(:create) do |t|
-        t.receiver.recalculate_balance!
-        t.sender&.recalculate_balance!
-      end
-    end
   end
 end
