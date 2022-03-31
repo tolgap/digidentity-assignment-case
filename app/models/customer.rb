@@ -23,9 +23,9 @@ class Customer < ApplicationRecord
     sent_transactions.or(received_transactions).order(created_at: :desc)
   end
 
-  def update_balance_atomic!(amount_cents:)
+  def update_balance_atomic!(amount:)
     lock!
-    self.balance_cents += amount_cents
+    self.balance += amount
     save!
   end
 end

@@ -25,8 +25,8 @@ class Transaction < ApplicationRecord
 
   def after_create_recalculate_sender_receiver_balances
     ActiveRecord::Base.transaction do
-      sender&.update_balance_atomic!(amount_cents: -amount_cents)
-      receiver.update_balance_atomic!(amount_cents: amount_cents)
+      sender&.update_balance_atomic!(amount: -amount)
+      receiver.update_balance_atomic!(amount: amount)
     end
   end
 

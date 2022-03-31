@@ -10,7 +10,9 @@ RSpec.describe Transaction do
     let(:receiver) { create(:customer, balance_cents: 50_00) }
 
     it "should call receiver.update_balance_atomic!" do
-      expect(receiver).to receive(:update_balance_atomic!).with(amount_cents: 25_00)
+      expect(receiver)
+        .to receive(:update_balance_atomic!)
+        .with(amount: Money.from_cents(25_00))
 
       transaction.save
     end
@@ -35,8 +37,13 @@ RSpec.describe Transaction do
     let(:receiver) { create(:customer, balance_cents: 50_00) }
 
     it "should call .update_balance_atomic! on receiver and sender" do
-      expect(sender).to receive(:update_balance_atomic!).with(amount_cents: -25_00)
-      expect(receiver).to receive(:update_balance_atomic!).with(amount_cents: 25_00)
+      expect(sender)
+        .to receive(:update_balance_atomic!)
+        .with(amount: Money.from_cents(-25_00))
+
+      expect(receiver)
+        .to receive(:update_balance_atomic!)
+        .with(amount: Money.from_cents(25_00))
 
       expect(transaction.save).to be(true)
     end
